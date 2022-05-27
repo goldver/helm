@@ -42,7 +42,7 @@ service:
   port: 80
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
@@ -50,7 +50,7 @@ ingress:
   hosts:
     - host: chart-example.local
       paths:
-        - path: /
+        - path: /michael
           pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
