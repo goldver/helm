@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
-import jenkins.model.*
-import groovy.json.*
-def user
+// import jenkins.model.*
+// import groovy.json.*
+// def user
 
 node("jenkins-helm") {
    println "misha"
@@ -13,60 +13,60 @@ node("jenkins-helm") {
 //     currentBuild.displayName = "${ENV_PROFILE}-${INSTANCE_NAME}"
 
 //     def slackNotificationChannel = "slack_channel"
-    def sourceRepo = 'helm'
-    def branches = ["${sourceRepo}": 'master']
+//     def sourceRepo = 'helm'
+//     def branches = ["${sourceRepo}": 'master']
 
-    def jenkinsGitId = 'jenkins-auth'
+//     def jenkinsGitId = 'jenkins-auth'
 
-    try {
-        stage('print_input_variables') {
-            // ACTION [deploy, destroy]
-            get_job_config()
-            deleteDir()
-            println  "==> ACTION: ${ACTION}\n" + \
+//     try {
+//         stage('print_input_variables') {
+//             // ACTION [deploy, destroy]
+//             get_job_config()
+//             deleteDir()
+//             println  "==> ACTION: ${ACTION}\n" + \
                    
-//                     "==> USER NAME: ${user}\n" + \
-                    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        }
+// //                     "==> USER NAME: ${user}\n" + \
+//                     "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+//         }
 
 
-        stage('clone_repos') {
-            dir("${WORKSPACE}") {
-                branches.each {
-                    println '### Cloning Git Repo ' + it.key + ' ###'
-                    sh "git clone --branch " + it.value + " git@github.com:goldver/" + it.key + ".git"
-                    sh "cd " + it.key + "; git status"
-                }
-            }
-        }
+//         stage('clone_repos') {
+//             dir("${WORKSPACE}") {
+//                 branches.each {
+//                     println '### Cloning Git Repo ' + it.key + ' ###'
+//                     sh "git clone --branch " + it.value + " git@github.com:goldver/" + it.key + ".git"
+//                     sh "cd " + it.key + "; git status"
+//                 }
+//             }
+//         }
 
 
-        stage('run_execution_code') {
-            dir("${sourceRepo}/") {
-                sh "helm " + ${ACTION}  + " michael-hw simple-app/ --values simple-app/values.yaml --namespace michael"
-            }
-        }
+//         stage('run_execution_code') {
+//             dir("${sourceRepo}/") {
+//                 sh "helm " + ${ACTION}  + " michael-hw simple-app/ --values simple-app/values.yaml --namespace michael"
+//             }
+//         }
 
 
-    } catch (exeption) {
-//         currentBuild.result = "FAILED"
-//         slackSend (channel: slackNotificationChannel, color: '#FF0000', message: "FAILED")
-        throw exeption
-    } finally {
-        echo "Finishing deploying helm code.."
-//         currentBuild.result = currentBuild.result ?: "SUCCESS"
+//     } catch (exeption) {
+// //         currentBuild.result = "FAILED"
+// //         slackSend (channel: slackNotificationChannel, color: '#FF0000', message: "FAILED")
+//         throw exeption
+//     } finally {
+//         echo "Finishing deploying helm code.."
+// //         currentBuild.result = currentBuild.result ?: "SUCCESS"
 
-//         def formattedJobLink = '<' + env.BUILD_URL + 'console|link>'
-//         def message = "Job Status: ${currentBuild.result}\n" + \
-//                       "Environment: ${ENV_PROFILE}\n" + \
-//                       "Job Link: " + formattedJobLink + "\n" + \
-//                       "User: " + user + "\n" + \
-//                       "Action: " + ACTION
+// //         def formattedJobLink = '<' + env.BUILD_URL + 'console|link>'
+// //         def message = "Job Status: ${currentBuild.result}\n" + \
+// //                       "Environment: ${ENV_PROFILE}\n" + \
+// //                       "Job Link: " + formattedJobLink + "\n" + \
+// //                       "User: " + user + "\n" + \
+// //                       "Action: " + ACTION
 
-//         println formattedJobLink
-//         println branchUrl
+// //         println formattedJobLink
+// //         println branchUrl
 
-//         slackSend (channel: slackNotificationChannel, color: '#00FF00', message: message)
-//         echo "message: $message"
-   }
+// //         slackSend (channel: slackNotificationChannel, color: '#00FF00', message: message)
+// //         echo "message: $message"
+//    }
 }
