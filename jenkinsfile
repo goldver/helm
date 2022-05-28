@@ -3,7 +3,7 @@
 // import groovy.json.*
 // def user
 
-node("jenkins-helm") {
+// node("jenkins-helm") {
    println "misha"
 
 //     wrap([$class: 'BuildUser']) {
@@ -69,4 +69,4 @@ node("jenkins-helm") {
 // //         slackSend (channel: slackNotificationChannel, color: '#00FF00', message: message)
 // //         echo "message: $message"
 //    }
-}
+// }
