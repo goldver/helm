@@ -3,5 +3,8 @@ import jenkins.model.*
 def user
    
 stage('login') {
-   println "misha"
+   println "### Login to AKS ###"
+   sh "az aks get-credentials -n devops-interview-aks -g  devops-interview-rg"
+   sh "export KUBECONFIG=~/.kube/config"
+   sh "kubelogin convert-kubeconfig -l msi"
 }
