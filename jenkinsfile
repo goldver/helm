@@ -4,14 +4,15 @@ import groovy.json.*
 def user
 
 node("jenkins-helm") {
+   println "misha"
 
-    wrap([$class: 'BuildUser']) {
-        user = env.BUILD_USER_ID
-    }
+//     wrap([$class: 'BuildUser']) {
+//         user = env.BUILD_USER_ID
+//     }
 
-    currentBuild.displayName = "${ENV_PROFILE}-${INSTANCE_NAME}"
+//     currentBuild.displayName = "${ENV_PROFILE}-${INSTANCE_NAME}"
 
-    def slackNotificationChannel = "slack_channel"
+//     def slackNotificationChannel = "slack_channel"
     def sourceRepo = 'helm'
     def branches = ["${sourceRepo}": 'master']
 
@@ -22,9 +23,9 @@ node("jenkins-helm") {
             // ACTION [deploy, destroy]
             get_job_config()
             deleteDir()
-            println "==> ENVIRONMENT: ${ENV_PROFILE}\n" + \
-                    "==> ACTION: ${ACTION}\n" + \
-                    "==> USER NAME: ${user}\n" + \
+            println  "==> ACTION: ${ACTION}\n" + \
+                   
+//                     "==> USER NAME: ${user}\n" + \
                     "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         }
 
@@ -48,24 +49,24 @@ node("jenkins-helm") {
 
 
     } catch (exeption) {
-        currentBuild.result = "FAILED"
-        slackSend (channel: slackNotificationChannel, color: '#FF0000', message: "FAILED")
+//         currentBuild.result = "FAILED"
+//         slackSend (channel: slackNotificationChannel, color: '#FF0000', message: "FAILED")
         throw exeption
     } finally {
         echo "Finishing deploying helm code.."
-        currentBuild.result = currentBuild.result ?: "SUCCESS"
+//         currentBuild.result = currentBuild.result ?: "SUCCESS"
 
-        def formattedJobLink = '<' + env.BUILD_URL + 'console|link>'
-        def message = "Job Status: ${currentBuild.result}\n" + \
-                      "Environment: ${ENV_PROFILE}\n" + \
-                      "Job Link: " + formattedJobLink + "\n" + \
-                      "User: " + user + "\n" + \
-                      "Action: " + ACTION
+//         def formattedJobLink = '<' + env.BUILD_URL + 'console|link>'
+//         def message = "Job Status: ${currentBuild.result}\n" + \
+//                       "Environment: ${ENV_PROFILE}\n" + \
+//                       "Job Link: " + formattedJobLink + "\n" + \
+//                       "User: " + user + "\n" + \
+//                       "Action: " + ACTION
 
-        println formattedJobLink
-        println branchUrl
+//         println formattedJobLink
+//         println branchUrl
 
-        slackSend (channel: slackNotificationChannel, color: '#00FF00', message: message)
-        echo "message: $message"
+//         slackSend (channel: slackNotificationChannel, color: '#00FF00', message: message)
+//         echo "message: $message"
    }
 }
