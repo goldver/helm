@@ -5,7 +5,7 @@ def user
 stage('login') {
    println "### Login to AKS ###"
    
-   sh "ssh azureuser@20.126.101.148"
+//    sh "ssh azureuser@20.126.101.148"
 //    sh "az aks get-credentials -n devops-interview-aks -g  devops-interview-rg"
 //    sh "export KUBECONFIG=~/.kube/config"
 //    sh "kubelogin convert-kubeconfig -l msi"
