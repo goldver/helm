@@ -1,10 +1,14 @@
 #!/usr/bin/env groovy
-// import jenkins.model.*
-// import groovy.json.*
-// def user
+import jenkins.model.*
+import groovy.json.*
+def user
 
+   
+stage('login') {
+    println "misha"
+}
 // node("jenkins-helm") {
-   println "misha"
+  
 
 //     wrap([$class: 'BuildUser']) {
 //         user = env.BUILD_USER_ID
