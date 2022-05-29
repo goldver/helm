@@ -1,9 +1,10 @@
 pipeline {
 
   agent {
-    docker {
-        image 'roffe/kubectl:latest'
-    }
+   any
+   // docker {
+   //     image 'roffe/kubectl:latest'
+   // }
   }
 
   stages {
