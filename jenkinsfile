@@ -10,7 +10,8 @@ pipeline {
      stage('Deploy') {
             steps {
                 withKubeConfig([credentialsId: 'pizdez']) {
-                    sh 'kubectl apply -f deployment.yaml'
+                    //sh 'kubectl apply -f deployment.yaml'
+                    kubectl get pods --namespace michael
                 }
             }
         }
