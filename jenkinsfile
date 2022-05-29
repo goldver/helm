@@ -1,12 +1,11 @@
-#!/usr/bin/env groovy
-import jenkins.model.*
-def user
-   
-stage('login') {
-   println "### Login to AKS ###"
-   
-//    sh "ssh azureuser@20.126.101.148"
-//    sh "az aks get-credentials -n devops-interview-aks -g  devops-interview-rg"
-//    sh "export KUBECONFIG=~/.kube/config"
-//    sh "kubelogin convert-kubeconfig -l msi"
+pipeline {
+     stage('Deploy') {
+         agent {docker {image 'roffe/kubectl:latest'}}
+            steps {
+                 withKubeConfig([credentialsId: 'pizdez']) {
+                     sh 'kubectl apply -f deployment.yaml'
+                 }
+            }
+        }
+    }
 }
