@@ -1,11 +1,11 @@
 pipeline {
-     stage('Deploy') {
-         agent {docker {image 'roffe/kubectl:latest'}}
-            steps {
-                 withKubeConfig([credentialsId: 'pizdez']) {
-                     sh 'kubectl apply -f deployment.yaml'
-                 }
+  stage('Deploy') {
+  println "######"
+    agent {docker {image 'roffe/kubectl:latest'}}
+       steps {
+            withKubeConfig([credentialsId: 'pizdez']) {
+                sh 'kubectl apply -f deployment.yaml'
             }
-        }
-    }
+       }
+   }
 }
