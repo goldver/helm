@@ -11,7 +11,7 @@ pipeline {
             steps {
                 withKubeConfig([credentialsId: 'pizdez']) {
                     //sh 'kubectl apply -f deployment.yaml'
-                    kubectl get pods --namespace michael
+                   sh 'kubectl get pods --namespace michael'
                 }
             }
         }
