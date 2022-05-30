@@ -1,18 +1,21 @@
 pipeline {
 
   agent {
-    docker {
-        image 'roffe/kubectl:latest'
+    any {
     }
   }
 
   stages {
      stage('Deploy') {
             steps {
-                withKubeConfig([credentialsId: 'pizdez']) {
-                   //sh 'kubectl get pods --namespace michael'
+                withKubeConfig([credentialsId: 'aks-config']) {
+
                 }
             }
         }
     }
 }
+
+// install plugin kubernetes-cli for authentication
+// add global secret GH token [GH app]
+// add .kubeconfig to global secret [file]
