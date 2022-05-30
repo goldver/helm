@@ -1,18 +1,16 @@
 pipeline {
 
-  agent any
-   // docker {
-   //     image 'roffe/kubectl:latest'
-   // }
-
+  agent {
+    docker {
+        image 'roffe/kubectl:latest'
+    }
+  }
 
   stages {
      stage('Deploy') {
             steps {
-                echo 'Hi from Deploy stage!'
                 withKubeConfig([credentialsId: 'pizdez']) {
-                    //sh 'kubectl apply -f deployment.yaml'
-                   sh 'kubectl get pods --namespace michael'
+                   //sh 'kubectl get pods --namespace michael'
                 }
             }
         }
