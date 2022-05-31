@@ -14,10 +14,11 @@ pipeline {
                     script {
                         if (ACTION == 'deploy') {
                             echo '### HELM DEPLOY ###'
-                            // helm install michael-hw simple-web/ --values simple-web/values.yaml --namespace michael
+                            sh 'kubectl get pods --namespace michael'
+                            sh 'helm install michael-hw simple-web/ --values simple-web/values.yaml --namespace michael'
                         } else {
                             echo '### HELM DESTROY ###'
-                            // helm uninstall michael-hw --namespace michael
+                            sh 'helm uninstall michael-hw --namespace michael'
                         }
                     }
                 }
