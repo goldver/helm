@@ -29,5 +29,5 @@ pipeline {
 
 // install plugin kubernetes-cli for authentication
 // add global secret GH token [GH app]
-// add .kubeconfig to global secret [file]
+// add .kubeconfig to global secret [as file]
 
